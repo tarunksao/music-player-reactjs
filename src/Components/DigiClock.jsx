@@ -11,6 +11,10 @@ function convertTime (time) {
         obj.hour = obj.hour%12;
     }
 
+    if (Math.floor(obj.minute/10)<1) {
+        obj.minute = `0${obj.minute}`;
+    }
+
     return obj;
 }
 
