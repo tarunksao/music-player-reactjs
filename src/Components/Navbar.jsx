@@ -7,7 +7,7 @@ import Battery from '../Images/Battery.svg';
 
 const Navbar = () => {
   return (
-    <Flex justifyContent='space-between' mb={'35px'}>
+    <Flex justifyContent='space-between' mb={'35px'} px='8px'>
         <Box>
             <DigiClock />
         </Box>
