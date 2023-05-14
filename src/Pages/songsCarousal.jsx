@@ -10,7 +10,7 @@ const SongsCarousal = () => {
     <div className='Carousel' style={{marginLeft:'-16px', overflow:'visible'}}>
         <Carousel
         autoPlay={false}
-        centerSlidePercentage={60}
+        centerSlidePercentage={50}
         centerMode
         swipeable
         showArrows={true}
@@ -40,7 +40,7 @@ const SongsCarousal = () => {
           >
             <Link to={`/player/${el.id-1}`} style={{display:'flex', gap:'10px', flexDirection:'column'}}>
                 <Box w='280px' h='160px' mb='12px' borderRadius='6px'>
-                  <Image src={el.songImg} alt={el.songName} w='100%' h='100%' borderRadius='6px' />
+                  <Image src={el.songImg} alt={el.songName} w='100%' h='100%' borderRadius='6px' fit={'contain'} />
                 </Box>
                 <Heading color='white' textAlign={'left'} fontSize='16px' letterSpacing={'0.2px'} lineHeight='18px'>{el.songName}</Heading>
             </Link>
