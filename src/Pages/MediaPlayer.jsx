@@ -83,7 +83,7 @@ function MediaPlayer() {
     };
 
     return (
-        <Box>
+        <Box bg={"transparent"}>
             <Flex w={'full'} justifyContent={'space-between'} alignItems={"center"} mb={6}>
                 <Icon fontSize='30px' as={ChevronDownIcon} color={'white'} fontWeight={"extrabold"} />
                 <Image src={Vector}  alt="vector_icon" />
@@ -91,18 +91,22 @@ function MediaPlayer() {
 
             {/* Song Details Section */}
 
-            <Flex 
+            <Flex
+                m='auto'
                 justifyContent={'center'} 
                 alignItems={"center"} 
+                w={'326px'} 
+                h={'132px'}
                 mb={'16px'}   
                 >
                 <Image 
                     src={songsList[id]?.songImg}
                     alt={songsList[id]?.songName}
-                    w={'326px'} 
-                    h={'132px'} 
+                    w={'100%'} 
+                    h={'100%'}
                     boxShadow= '0px 1px 4px rgba(0, 0, 0, 0.1)'
                     borderRadius='6px'
+                    fit={"contain"}
                     />
             </Flex>
             <Heading mb='8px' textAlign='center' color='white' fontSize={'20px'}>{songsList[id].songName}</Heading>
