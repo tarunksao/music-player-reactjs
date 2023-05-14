@@ -1,10 +1,12 @@
 import React, { useState, useRef } from "react";
-import Phone_Mila_Ke_Raftaar from '../Songs/Phone_Mila_Ke_Raftaar.mp3';
-import { Box, Button, Flex, Icon, Image, Slider, SliderFilledTrack, SliderThumb, SliderTrack, Text } from "@chakra-ui/react";
+import { Box, Flex, Icon, Image, Slider, SliderFilledTrack, SliderThumb, SliderTrack, Text } from "@chakra-ui/react";
 import {IoPlaySkipBackOutline, IoPlaySkipForwardOutline} from 'react-icons/io5';
 import {BsPauseCircleFill, BsPlayCircleFill} from 'react-icons/bs';
 import skipForward from '../Images/skipForward.svg';
 import skipBackward from '../Images/skipBackward.svg';
+import Vector from '../Images/Vector.svg';
+import {ChevronDownIcon} from '@chakra-ui/icons';
+import {songsList} from '../Songs/songsDB';
 
 function convertTime(time) {
     if (!time) return ;
@@ -27,7 +29,7 @@ function convertTime(time) {
     return strMin+':'+strSec;
 }
 
-function MediaPlayer(props) {
+function MediaPlayer({id=0}) {
   const [nowPlaying, setNowPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const audioRef = useRef();
@@ -61,6 +63,10 @@ function MediaPlayer(props) {
 
   return (
     <Box>
+        <Flex w={'full'} justifyContent={'space-between'} alignItems={"center"}>
+            <Icon as={ChevronDownIcon} color={'white'} fontWeight={"extrabold"} />
+            <Image src={Vector} />
+        </Flex>
         <Slider defaultValue={0} max={audioRef.current?.duration} value={audioRef.current?.currentTime} onChange={(time) => audioRef.current.currentTime = time}>
             <SliderTrack >
                 <SliderFilledTrack />
@@ -73,7 +79,7 @@ function MediaPlayer(props) {
         </Flex>
         <audio
             ref={audioRef}
-            src={Phone_Mila_Ke_Raftaar}
+            src={'Phone_Mila_Ke_Raftaar'}
             onTimeUpdate={() => setCurrentTime(audioRef.current?.currentTime)}
         ></audio>
         <Flex w='full' justifyContent={'space-between'} alignItems={'center'}>
