@@ -9,7 +9,7 @@ import Next from '../Images/Next.svg';
 import Book from '../Images/Book.svg';
 import {ChevronDownIcon} from '@chakra-ui/icons';
 import {songsList} from '../Songs/songsDB';
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 function convertTime(time) {
     if (!time) return '00:00' ;
@@ -33,11 +33,12 @@ function convertTime(time) {
 }
 
 function MediaPlayer() {
-    const {id} = useParams(); 
+    const {id} = useParams();
     const [nowPlaying, setNowPlaying] = useState(false);
     const [currentTime, setCurrentTime] = useState(0);
     const [nowPlayingIndex, setNowPlayingIndex] = useState(id || 0);
     const audioRef = useRef();
+    const navigate = useNavigate();
 
     const play = () => {
         setNowPlaying(true);
@@ -60,15 +61,17 @@ function MediaPlayer() {
 
     const next = () => {
         if (nowPlayingIndex === songsList.length-1) {
-            setNowPlayingIndex(0);
+            // setNowPlayingIndex(0);
+            navigate(`/player/${0}`)
         } else {
             setNowPlayingIndex(index => index+1);
+            navigate(`/player/${nowPlayingIndex}`)
         }
         setNowPlaying(false);
     };
 
     const previous = () => {
-            if (nowPlayingIndex === 0) {
+        if (nowPlayingIndex === 0) {
             setNowPlayingIndex(songsList.length-1);
         } else {
             setNowPlayingIndex(index => index-1);
@@ -91,8 +94,8 @@ function MediaPlayer() {
                 mb={'16px'}   
                 >
                 <Image 
-                    src={songsList[nowPlayingIndex].songImg}
-                    alt={songsList[nowPlayingIndex].songName}
+                    src={songsList[nowPlayingIndex]?.songImg}
+                    alt={songsList[nowPlayingIndex]?.songName}
                     w={'326px'} 
                     h={'132px'} 
                     boxShadow= '0px 1px 4px rgba(0, 0, 0, 0.1)'

@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 
 const SongsCarousal = () => {
   return (
-    <div className='Carousel'>
+    <div className='Carousel' style={{marginLeft:'-16px', overflow:'visible'}}>
         <Carousel
         autoPlay={false}
         centerSlidePercentage={60}
@@ -19,9 +19,10 @@ const SongsCarousal = () => {
         thumbWidth={100}
         interval={2000}
         transitionTime={500}
-        width={"100%"}
+        width={"596px"}
         useKeyboardArrows
         showThumbs={false}
+        
       >
         {songsList?.map((el, i) => (
           <div
@@ -39,7 +40,7 @@ const SongsCarousal = () => {
             key={i}
           >
             <Link to={`/player/${el.id-1}`}>
-                <Image src={el.songImg} alt={el.songName} w='280px' h='160px' />
+                <Image src={el.songImg} alt={el.songName} w='250px' h='160px' />
                 <Heading color='white' fontSize='16px' letterSpacing={'0.2px'} lineHeight='18px'>{el.songName}</Heading>
             </Link>
           </div>

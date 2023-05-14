@@ -6,7 +6,7 @@ import SongsCarousal from './songsCarousal';
 
 const Home = () => {
   return (
-    <Box px='4px'>
+    <Box px='4px' h='1332px'>
         <Flex w={'full'} justifyContent={'space-between'} alignItems={'center'}>
             <Heading fontSize='22px' color={'white'}>Hey <Highlight query={'Anirudh'} styles={{bgGradient:'linear(to-l, #5065DA,#556FFF,#C557AD,#E65F9A,#E66176)',bgClip:'text'}} >Anirudh</Highlight> 👋</Heading>
             <Image src={userImg} alt='User_Image' w='32px' />
