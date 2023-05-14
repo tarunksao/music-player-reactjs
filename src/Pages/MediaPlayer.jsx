@@ -36,10 +36,10 @@ function MediaPlayer() {
     const {id} = useParams();
     const [nowPlaying, setNowPlaying] = useState(false);
     const [currentTime, setCurrentTime] = useState(0);
-    const [nowPlayingIndex, setNowPlayingIndex] = useState(id || 0);
+    // const [nowPlayingIndex, setNowPlayingIndex] = useState(id);
     const audioRef = useRef();
     const navigate = useNavigate();
-
+    // console.log(songsList.length);
     const play = () => {
         setNowPlaying(true);
         audioRef.current.play();
@@ -60,21 +60,24 @@ function MediaPlayer() {
 
 
     const next = () => {
-        if (nowPlayingIndex === songsList.length-1) {
+        if (id == songsList.length-1) {
             // setNowPlayingIndex(0);
             navigate(`/player/${0}`)
         } else {
-            setNowPlayingIndex(index => index+1);
-            navigate(`/player/${nowPlayingIndex}`)
+            // setNowPlayingIndex(index => index+1);
+            navigate(`/player/${Number(id)+1}`)
         }
         setNowPlaying(false);
     };
 
     const previous = () => {
-        if (nowPlayingIndex === 0) {
-            setNowPlayingIndex(songsList.length-1);
+        if (id == 0) {
+            navigate(`/player/${songsList.length-1}`)
+            // setNowPlayingIndex(songsList.length-1);
         } else {
-            setNowPlayingIndex(index => index-1);
+            // setNowPlayingIndex(index => index-1);
+            navigate(`/player/${Number(id)-1}`)
+
         }
         setNowPlaying(false);
     };
@@ -94,16 +97,16 @@ function MediaPlayer() {
                 mb={'16px'}   
                 >
                 <Image 
-                    src={songsList[nowPlayingIndex]?.songImg}
-                    alt={songsList[nowPlayingIndex]?.songName}
+                    src={songsList[id]?.songImg}
+                    alt={songsList[id]?.songName}
                     w={'326px'} 
                     h={'132px'} 
                     boxShadow= '0px 1px 4px rgba(0, 0, 0, 0.1)'
                     borderRadius='6px'
                     />
             </Flex>
-            <Heading mb='8px' textAlign='center' color='white' fontSize={'20px'}>{songsList[nowPlayingIndex].songName}</Heading>
-            <Text textAlign='center' color='white' opacity={0.6} mb={4}>{songsList[nowPlayingIndex].artist}</Text>
+            <Heading mb='8px' textAlign='center' color='white' fontSize={'20px'}>{songsList[id].songName}</Heading>
+            <Text textAlign='center' color='white' opacity={0.6} mb={4}>{songsList[id].artist}</Text>
             <Flex flexDir="column" gap='8px' mb='75px'>
                 <Button 
                     m='auto' 
@@ -143,7 +146,7 @@ function MediaPlayer() {
             </Flex>
             <audio
                 ref={audioRef}
-                src={songsList[nowPlayingIndex].songFile}
+                src={songsList[id].songFile}
                 onTimeUpdate={() => setCurrentTime(audioRef.current?.currentTime)}
             ></audio>
             <Flex w='full' justifyContent={'space-between'} alignItems={'center'} my={'42px'}>
