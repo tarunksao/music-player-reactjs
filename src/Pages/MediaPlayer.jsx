@@ -1,15 +1,16 @@
 import React, { useState, useRef } from "react";
-import { Box, Flex, Icon, Image, Slider, SliderFilledTrack, SliderThumb, SliderTrack, Text } from "@chakra-ui/react";
-import {IoPlaySkipBackOutline, IoPlaySkipForwardOutline} from 'react-icons/io5';
-import {BsPauseCircleFill, BsPlayCircleFill} from 'react-icons/bs';
+import { Box, Flex, Heading, Icon, Image, Slider, SliderFilledTrack, SliderThumb, SliderTrack, Text } from "@chakra-ui/react";
+import {RiPauseCircleFill, RiPlayCircleFill} from 'react-icons/ri';
 import skipForward from '../Images/skipForward.svg';
 import skipBackward from '../Images/skipBackward.svg';
 import Vector from '../Images/Vector.svg';
+import Previous from '../Images/Previous.svg';
+import Next from '../Images/Next.svg';
 import {ChevronDownIcon} from '@chakra-ui/icons';
 import {songsList} from '../Songs/songsDB';
 
 function convertTime(time) {
-    if (!time) return ;
+    if (!time) return '00:00' ;
     let minute = Math.floor(time/60);
     let second = Math.floor(time%60);
 
@@ -32,6 +33,7 @@ function convertTime(time) {
 function MediaPlayer({id=0}) {
   const [nowPlaying, setNowPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
+  const [nowPlayingIndex, setNowPlayingIndex] = useState(id);
   const audioRef = useRef();
 
   const play = () => {
@@ -54,40 +56,67 @@ function MediaPlayer({id=0}) {
 
 
   const next = () => {
-    // Logic to play the next song in the playlist
+    if (nowPlayingIndex === songsList.length-1) {
+        setNowPlayingIndex(0);
+    } else {
+        setNowPlayingIndex(index => index+1);
+    }
+    setNowPlaying(false);
   };
 
   const previous = () => {
-    // Logic to play the previous song in the playlist
+        if (nowPlayingIndex === 0) {
+        setNowPlayingIndex(songsList.length-1);
+    } else {
+        setNowPlayingIndex(index => index-1);
+    }
+    setNowPlaying(false);
   };
 
   return (
     <Box>
-        <Flex w={'full'} justifyContent={'space-between'} alignItems={"center"}>
-            <Icon as={ChevronDownIcon} color={'white'} fontWeight={"extrabold"} />
+        <Flex w={'full'} justifyContent={'space-between'} alignItems={"center"} mb={6}>
+            <Icon fontSize='30px' as={ChevronDownIcon} color={'white'} fontWeight={"extrabold"} />
             <Image src={Vector} />
         </Flex>
-        <Slider defaultValue={0} max={audioRef.current?.duration} value={audioRef.current?.currentTime} onChange={(time) => audioRef.current.currentTime = time}>
-            <SliderTrack >
-                <SliderFilledTrack />
+
+        {/* Song Details Section */}
+        <Flex 
+            justifyContent={'center'} 
+            alignItems={"center"} 
+            mb={'16px'}   
+            >
+            <Image 
+                src={songsList[nowPlayingIndex].songImg} 
+                w={'326px'} 
+                h={'132px'} 
+                boxShadow= '0px 1px 4px rgba(0, 0, 0, 0.1)'
+                borderRadius='6px'
+                />
+        </Flex>
+        <Heading mb='8px' textAlign='center' color='white' fontSize={'20px'}>{songsList[nowPlayingIndex].songName}</Heading>
+        <Text textAlign='center' color='white' opacity={0.6} mb={4}>{songsList[nowPlayingIndex].artist}</Text>
+        <Slider defaultValue={0} max={audioRef.current?.duration} value={audioRef?.current?.currentTime} onChange={(time) => audioRef.current.currentTime!==null ? audioRef.current.currentTime = time : 0}>
+            <SliderTrack bg={'#2E3035'} >
+                <SliderFilledTrack bg={'#3281FF'} />
             </SliderTrack>
-            <SliderThumb />
+            <SliderThumb bg={'#3281FF'} />
         </Slider>
         <Flex w='full' justifyContent='space-between'>
-            <Text color='white'>{convertTime(currentTime)}</Text>
-            <Text color='white'>{convertTime(audioRef.current?.duration)}</Text>
+            <Text fontSize='12px' color='white'>{convertTime(currentTime)}</Text>
+            <Text fontSize='12px' color='white'>{convertTime(audioRef.current?.duration)}</Text>
         </Flex>
         <audio
             ref={audioRef}
-            src={'Phone_Mila_Ke_Raftaar'}
+            src={songsList[nowPlayingIndex].songFile}
             onTimeUpdate={() => setCurrentTime(audioRef.current?.currentTime)}
         ></audio>
-        <Flex w='full' justifyContent={'space-between'} alignItems={'center'}>
-            <Icon color='white' fontWeight={"bold"} fontSize='30px' as={IoPlaySkipBackOutline} onClick={previous} />
-            <Image src={skipBackward} onClick={skip15SecBackward} />
-            <Icon color='white' fontSize='60px' as={nowPlaying ? BsPauseCircleFill : BsPlayCircleFill} onClick={nowPlaying ? pause : play} />
-            <Image src={skipForward} onClick={skip15SecForward} />
-            <Icon color='white' fontWeight={"bold"} fontSize='30px' as={IoPlaySkipForwardOutline} onClick={next} />
+        <Flex w='full' justifyContent={'space-between'} alignItems={'center'} my={'42px'}>
+            <Image src={Previous} onClick={previous} w='32px' />
+            <Image src={skipBackward} onClick={skip15SecBackward} w='32px' />
+            <Icon color='white' fontSize='72px' as={nowPlaying ? RiPauseCircleFill : RiPlayCircleFill} onClick={nowPlaying ? pause : play} />
+            <Image src={skipForward} onClick={skip15SecForward}  w='32px' />
+            <Image src={Next} onClick={next}  w='32px' />
         </Flex>
     </Box>
   );

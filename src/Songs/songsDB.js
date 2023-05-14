@@ -16,12 +16,12 @@ import mary_kom from '../Images/mary_kom.jpg'
 
 
 export const songsList = [
-    {id:1, songFile:Doobey_Gehraiyaan, songName:'Phone Mila Ke - Raftaar', artist:'Raftaar - Akasa', songImg:doobey_gehraiyaan},
-    {id:2, songFile:Parinda_From_Saina_Amaal_Mallik, songName:'Phone Mila Ke - Raftaar', artist:'Raftaar - Akasa', songImg:parinda_from_saina},
+    {id:1, songFile:Doobey_Gehraiyaan, songName:'Doobey - Gehraiyaan', artist:'Lothika', songImg:doobey_gehraiyaan},
+    {id:2, songFile:Parinda_From_Saina_Amaal_Mallik, songName:'Parinda - Saina', artist:'Amaal Malik', songImg:parinda_from_saina},
     {id:3, songFile:Phone_Mila_Ke_Raftaar, songName:'Phone Mila Ke - Raftaar', artist:'Raftaar - Akasa', songImg:phone_mila_ke_2023},
-    {id:4, songFile:Sulthan_Kgf_Chapter_2, songName:'Phone Mila Ke - Raftaar', artist:'Raftaar - Akasa', songImg:kgf_chapter_2_2022},
-    {id:5, songFile:Toofaan_Title_Track_Siddharth_Mahadevan, songName:'Phone Mila Ke - Raftaar', artist:'Raftaar - Akasa', songImg:toofaan_title_track_siddharth_mahadevan},
-    {id:6, songFile:Toofan_Kgf_Chapter_2, songName:'Phone Mila Ke - Raftaar', artist:'Raftaar - Akasa', songImg:kgf_chapter_2_2022},
-    {id:6, songFile:Tu_Toh_Gaya_Re_Bob_Biswas, songName:'Phone Mila Ke - Raftaar', artist:'Raftaar - Akasa', songImg:bob_biswas_2021},
-    {id:6, songFile:Ziddi_Dil_Mary_Kom, songName:'Phone Mila Ke - Raftaar', artist:'Raftaar - Akasa', songImg:mary_kom},
+    {id:4, songFile:Sulthan_Kgf_Chapter_2, songName:'Sulthan - KGF CHapter 2', artist:'Brijesh Shandilya - Priyanka Bharali', songImg:kgf_chapter_2_2022},
+    {id:5, songFile:Toofaan_Title_Track_Siddharth_Mahadevan, songName:'Toofaan Title Track', artist:'Siddharth Mahadevan', songImg:toofaan_title_track_siddharth_mahadevan},
+    {id:6, songFile:Toofan_Kgf_Chapter_2, songName:'Toofan Hindi - KGF Chapter 2', artist:'Sandesh Datta Naik', songImg:kgf_chapter_2_2022},
+    {id:6, songFile:Tu_Toh_Gaya_Re_Bob_Biswas, songName:'Tu Toh Gaya Re - Bob Biswas', artist:'Bianca Gomes', songImg:bob_biswas_2021},
+    {id:6, songFile:Ziddi_Dil_Mary_Kom, songName:'Ziddi DIl - Mary Kom', artist:'Vishal Dadlani', songImg:mary_kom},
 ]
